@@ -22,18 +22,25 @@ if "%INS_MUSIC%"=="yepyep" (
 )
 echo [DOWNLOAD] DownloadAria2
 call :download "https://raw.githubusercontent.com/lavanoid/rxToolsBuildKit/master/stuff/download_aria2.bat" "%INS_DATA%\scripts\download_aria2.bat"
+if "%error%"=="true" goto :EOF
 echo [DOWNLOAD] DownloadVBS
 call :download "https://raw.githubusercontent.com/lavanoid/rxToolsBuildKit/master/stuff/download_vbs.bat" "%INS_DATA%\scripts\download_vbs.bat"
+if "%error%"=="true" goto :EOF
 echo [DOWNLOAD] Install Python2
 call :download "https://raw.githubusercontent.com/lavanoid/rxToolsBuildKit/master/stuff/install_python.bat" "%INS_DATA%\scripts\install_python.bat"
+if "%error%"=="true" goto :EOF
 echo [DOWNLOAD] Install DevkitPro
 call :download "https://raw.githubusercontent.com/lavanoid/rxToolsBuildKit/master/stuff/install_devkitpro.bat" "%INS_DATA%\scripts\install_devkitpro.bat"
+if "%error%"=="true" goto :EOF
 echo [DOWNLOAD] Install MinGW
 call :download "https://raw.githubusercontent.com/lavanoid/rxToolsBuildKit/master/stuff/install_minGW.bat" "%INS_DATA%\scripts\install_minGW.bat"
+if "%error%"=="true" goto :EOF
 echo [DOWNLOAD] Install Git
 call :download "https://raw.githubusercontent.com/lavanoid/rxToolsBuildKit/master/stuff/install_git.bat" "%INS_DATA%\scripts\install_git.bat"
+if "%error%"=="true" goto :EOF
 echo [DOWNLOAD] Install Armips
 call :download "https://raw.githubusercontent.com/lavanoid/rxToolsBuildKit/master/stuff/install_armips.bat" "%INS_DATA%\scripts\install_armips.bat"
+if "%error%"=="true" goto :EOF
 echo [DOWNLOAD] System Backup
 call :download "https://raw.githubusercontent.com/lavanoid/rxToolsBuildKit/master/stuff/system_backup.bat" "%INS_DATA%\scripts\system_backup.bat"
 if "%1"=="no_install" goto :EOF
@@ -98,6 +105,13 @@ if not exist "%INS_DATA%\dl.vbs" (
   goto :endpause
 )
 wscript "%INS_DATA%\dl.vbs" %1 %2
+if not exist %2 (
+  set error=true
+  echo **ERROR** NNoooo!!!! It wouldn't download :/
+  color c
+  pause >nul
+  goto :EOF
+)
 if not [%3] EQU [] call :verify %2 %3
 goto :EOF
 :verify
