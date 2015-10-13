@@ -46,7 +46,7 @@ if not exist "%INS_DATA%\dl.vbs" (
   color c
   echo **ERROR** Failed to write the VBS file!
   echo Did you spill drink on the computer again? YOU WANKA!
-  goto :endpause
+  goto :EOF
 )
 wscript "%INS_DATA%\dl.vbs" %1 %2
 if not [%3] EQU [] call :verify %2 %3
